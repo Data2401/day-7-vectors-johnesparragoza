@@ -21,17 +21,21 @@ knitr::opts_chunk$set(echo = TRUE)
 5. Subtract `m` FROM `n`. Note the recycling!
 
 ```{r}
+#creates vector of digits 10 -> 49
 n <- 10:49
 
+#gets length of vector
 length(n)
 
 n + 1
 n
 
+#creating vector of 10 -> 1, using helper functions
 m <- seq(10,1)
 m <- 10:1
 m
 
+#subtracting vector n from m
 m - n
 ```
 
@@ -44,11 +48,14 @@ m - n
      + You'll need to add the argument `type = "l"` for a line. NOTE: That is a lower case "L", not a 1. 
 
 ```{r}
+#1
 x_range <- seq(-5, 10, by = 0.1)
 x_range
 
+#2
 sin_wave <- sin(x_range)
 
+#3
 plot(x_range, sin_wave, type = "l")
 ```
 
@@ -64,15 +71,23 @@ plot(x_range, sin_wave, type = "l")
 7. Bonus/extra: do the above in a way that would work no matter how long the vector is (as long as it's longer than 2 elements)
 
 ```{r}
+#1
 first_nums <- 40:50
 
+#2
 next_nums <- seq(51, 60)
 
+#3
 nums <- c(first_nums, next_nums)
 
+#4 - 6
 nums[7]
 nums[5:8]
-new_nums <- c(nums[1:3], nums[17:20])
+new_nums <- c(nums[1:3], nums[19:21])
+new_nums
+
+#7
+new_nums <- c(nums[1:3], nums[(length(nums)-2):length(nums)])
 new_nums
 ```
 
@@ -87,10 +102,11 @@ new_nums
      * Hint: x[is.na(x)] <- ...
 
 ```{r}
+
 x <- c(3.2, NA, 4.1, 5.0, NA, 2.8)
 
-x_no_na <- mean(x[!is.na(x)])
-x[is.na(x)] <- x_no_na
+x_no_na <- mean(x[!is.na(x)]) #gets mean of vector without missing variables
+x[is.na(x)] <- x_no_na # replaces NA variables with mean of x_no_na
 x
 ```
 
@@ -125,7 +141,7 @@ sum(is_a)
 ```{r}
 set.seed(2401)
 
-# simulate 200 fair die rolls
+# simulating 200 fair die rolls
 die_rolls <- sample(1:6, size = 200, replace = T)
 
 # counts of each face
@@ -147,7 +163,7 @@ most_common
 
 ```{r}
 roll_die <- function() {
-  sample(1:6, size = 1, replace = TRUE)
+  sample(1:6, size = 1, replace = T)
 }
 ```
 
@@ -157,7 +173,7 @@ roll_die <- function() {
 
 ```{r}
 roll_die1 <- function() {
-  rolls <- sample(1:6, size = 2, replace = TRUE)
+  rolls <- sample(1:6, size = 2, replace = T)
   sum(rolls)
 }
 ```
@@ -167,7 +183,7 @@ roll_die1 <- function() {
 
 
 ```{r}
-# Your one-roll function goes here
+# one-roll function
 winner_roll <- function(name1, name2) {
 
   # first roll
@@ -241,7 +257,7 @@ roll_match("john", "edgar")
 # "cheating" function
 roll_match_weighted <- function(name1, name2) {
   
-  # weighted die for player 1 (60% on 4–6)
+  # weighted die for player 1 
   roll_weighted <- function() {
     sample(1:6, size = 1, replace = TRUE,
            prob = c(0.10, 0.10, 0.20, 0.20, 0.20, 0.20))
